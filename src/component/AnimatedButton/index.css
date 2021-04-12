@@ -1,0 +1,122 @@
+
+.ui.basic.black.button, .ui.basic.black.buttons .button {
+    width: 86px;
+    font-size: 12px;
+    box-shadow: 0 0 0 1px #1b1c1d inset!important;
+    color: #1b1c1d!important;
+}
+
+.ui.basic.button, .ui.basic.buttons .button {
+    background: transparent none!important;
+    font-weight: 400;
+    border-radius: .28571429rem;
+    text-transform: none;
+    text-shadow: none!important;
+    box-shadow: 0 0 0 1px rgb(34 36 38 / 15%) inset;
+}
+
+.ui.animated.button {
+    position: relative;
+    overflow: hidden;
+    padding-right: 0!important;
+    vertical-align: middle;
+    z-index: 1;
+}
+
+.ui.button, .ui.buttons .button, .ui.buttons .or {
+    font-size: 1rem;
+}
+
+.ui.button {
+    cursor: pointer;
+    display: inline-block;
+    min-height: 1em;
+    outline: 0;
+    border: none;
+    vertical-align: baseline;
+    background: #e0e1e2 none;
+    color: rgba(0,0,0,.6);
+    margin: 0 .25em 0 0;
+    padding: .78571429em 1.5em .78571429em;
+    text-transform: none;
+    font-weight: 700;
+    line-height: 1em;
+    font-style: normal;
+    text-align: center;
+    text-decoration: none;
+    border-radius: .28571429rem;
+    -webkit-box-shadow: 0 0 0 1px transparent inset, 0 0 0 0 rgb(34 36 38 / 15%) inset;
+    box-shadow: 0 0 0 1px transparent inset, 0 0 0 0 rgb(34 36 38 / 15%) inset;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+   transition: opacity .1s ease,background-color .1s ease,color .1s ease,background .1s ease,-webkit-box-shadow .1s ease;
+    transition: opacity .1s ease,background-color .1s ease,color .1s ease,box-shadow .1s ease,background .1s ease;
+    transition: opacity .1s ease,background-color .1s ease,color .1s ease,box-shadow .1s ease,background .1s ease,-webkit-box-shadow .1s ease;
+    will-change: '';
+    -webkit-tap-highlight-color: transparent;
+}
+
+.ui.animated.button .visible.content {
+    left: auto;
+    right: 0;
+}
+
+.ui.animated.button .hidden.content, .ui.animated.button .visible.content {
+    transition: right .3s ease 0s;
+}
+
+.ui.animated.button .visible.content {
+    position: relative;
+    margin-right: 1.5em;
+}
+
+.ui.animated.button .content {
+    will-change: transform,opacity;
+}
+
+.visible {
+    visibility: visible !important;
+}
+
+.ui.animated.button .hidden.content {
+    top: 50%;
+    left: auto;
+    right: -100%;
+    margin-top: -.5em;
+}
+
+.ui.animated.button .hidden.content, .ui.animated.button .visible.content {
+    transition: right .3s ease 0s;
+}
+
+.ui.animated.button .hidden.content {
+    position: absolute;
+    width: 100%;
+}
+
+.ui.animated.button .content {
+    will-change: transform,opacity;
+}
+
+.ui.basic.black.button:hover, .ui.basic.black.buttons .button:hover {
+    background: 0 0!important;
+   box-shadow: 0 0 0 1px #27292a inset!important;
+    color: #27292a!important;
+}
+
+.ui.animated.button:focus .visible.content, .ui.animated.button:hover .visible.content {
+    left: auto;
+    right: 200%;
+}
+
+.ui.animated.button:focus .hidden.content, .ui.animated.button:hover .hidden.content {
+    left: auto;
+    right: 0;
+}
+
+.dark .ui.basic.black.button{
+    color: #c6c5c7 !important;
+    border: 1px solid #bbb8c7 !important;
+}
