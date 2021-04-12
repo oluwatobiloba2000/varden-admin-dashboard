@@ -15,12 +15,12 @@ function Login() {
                 <form onSubmit={(e)=> e.preventDefault()} style={{ margin: '25px 28px',display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                     <FormControl id="email">
                         <FormLabel>Email</FormLabel>
-                        <Input fontSize="12px" marginBottom="15px" type="email" />
+                        <Input fontSize="12px" placeholde="Enter Email Address" marginBottom="15px" type="email" />
                     </FormControl>
 
                     <FormControl id="password">
                         <FormLabel>Password</FormLabel>
-                        <Input type="password" />
+                        <Input type="password" placeholder="Enter Password"/>
                     </FormControl>
 
                     <Button
