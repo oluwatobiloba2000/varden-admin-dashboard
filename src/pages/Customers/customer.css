@@ -1,0 +1,13 @@
+.title_head {
+    font-size: 1.3rem;
+    width: fit-content;
+    padding: 5px 10px;
+    height: 45px;
+    display: flex;
+    background-color: white;
+    color: #d66656;
+    text-align: center;
+    font-weight: bold;
+    align-items: center;
+    justify-content: center;
+}

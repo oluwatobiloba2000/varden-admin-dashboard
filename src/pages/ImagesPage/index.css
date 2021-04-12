@@ -1,0 +1,4 @@
+.image_gallery_tab[aria-selected=true]{
+    background-color: #c4412f !important;
+    color: white  !important;
+}
