@@ -1,0 +1,66 @@
+.sidenav_list_item{
+    display: flex;
+    font-weight: 500;
+    height: 40px;
+    font-size: 14px;
+    align-items: center;
+    padding-left: 25px;
+    margin-top: 7px;
+}
+
+.sidenav_list_item:hover{
+    transition: .3s ease;
+    background-color: #77be4366;
+}
+
+.side_nav_active{
+    background-image: linear-gradient(to right,#77be4329, #88e841c7);
+    border-left: 3px solid green;
+}
+
+.toggle-icon{
+    display: block;
+    position: absolute;
+    font-size: 6px;
+    width: 54px;
+    top: 28px;
+    left: 10px;
+    z-index: 1;
+    width: 35px;
+    margin: -2.2em auto 0 .2em;
+    transition: margin 600ms;
+    cursor: pointer;
+}
+.toggle-icon .bar {
+    display: block;
+    width: 3.8em;
+    height: .2em;
+    margin: .9em;
+    border-right: 2.8em solid #fff;
+    border-left: .6em solid #fff;
+    box-sizing: border-box;
+    transition-property: transform,margin,border-right-color,box-shadow;
+    transition-duration: 600ms;
+}
+
+.toggle-icon .bar:nth-of-type(1) {
+    transition: opacity 300ms;
+}
+
+
+.sidenav_overlay{
+    cursor: url(../../img/close.svg), auto;
+}
+
+.sidenav_overlay .chakra-modal__content{
+    width: 250px !important;
+}
+@media all and (max-width: 900px){
+    .sidenav_list_item{
+        font-size: 12px;
+    }
+
+    .sidenav_list_item>svg{
+        width: 15px;
+    }
+}

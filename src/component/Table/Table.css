@@ -1,0 +1,174 @@
+
+
+.admin_table {
+  width: 100%;
+}
+
+.table_tr {
+  background-color: #ebeff4;
+}
+
+.table_th {
+  font-size: 10px !important;
+  color: #66696d !important;
+  font-weight: bolder !important;
+}
+
+.table_td {
+  color: #555555;
+  font-size: 12px;
+  font-weight: bolder;
+}
+
+.next_zoom_btn {
+  width: 25px;
+  height: 25px;
+  background: green;
+  border-radius: 20px;
+  color: white;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  padding-top: 1px;
+  margin: 0 15px;
+}
+
+.pagination {
+  position: sticky;
+  bottom: -27px;
+  background-color: white;
+  height: 88px;
+  margin-top: 14px;
+  padding: 3px 10px;
+  width: 100%;
+  z-index: 1;
+}
+
+.btn-disabled {
+  color: gray;
+  cursor: not-allowed;
+}
+
+.btn-disabled-bg {
+  cursor: not-allowed;
+  color: gray;
+  background-color: #c1c1c1;
+}
+
+.green-tag {
+  display: inline-block;
+  font-size: 85%;
+  font-weight: 700;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  padding-left: 1rem !important;
+  padding-right: 1rem !important;
+  padding-bottom: .5rem !important;
+  padding-top: .5rem !important;
+  background-color: #2ed47a;
+  font-weight: normal;
+  color: white;
+  border-radius: 0.25rem;
+ 
+}
+
+.yellow-tag{
+  display: inline-block;
+  font-size: 85%;
+  font-weight: 700;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  padding-left: 1rem !important;
+  padding-right: 1rem !important;
+  padding-bottom: .5rem !important;
+  padding-top: .5rem !important;
+  background: rgb(255, 185, 70);
+  border-radius: 4px;
+  font-weight: normal;
+  color: white;
+}
+
+.action_icon_btn{
+  min-width: 30px !important;
+  height: 28px !important;
+  font-size: 17px !important;
+}
+
+.action_update_order_btn{
+  background-color: #2185d0;
+  color: white;
+}
+
+.action_update_order_btn:hover{
+  color: black;
+}
+
+.action_update_payment_btn{
+    background-color: black;
+    color: white;
+}
+
+.action_update_payment_btn:hover{
+  color: black;
+}
+
+
+/* dark mode styles */
+
+.dark .action_update_order_btn:hover, .dark .action_update_payment_btn:hover{
+  color: white;
+}
+
+.dark .title_head,
+.dark .admin_table_container {
+  background-color: #0c0b105c;
+  color: #d4d4d4;
+}
+
+.dark .table_tr {
+  background-color: #222127;
+}
+
+.dark .table_th {
+  color: #ffffffb3 !important;
+}
+
+.dark .table_td {
+  color: #ffffffbf;
+}
+
+.dark .pagination {
+  background-color: #222127;
+}
+.dark .green-tag{
+    background-color: #1d763c;
+}
+
+.dark .yellow-tag{
+  background-color: #ffb946b8;
+}
+
+@media all and (max-width: 515px) {
+  .navigation_container {
+    flex-wrap: wrap;
+  }
+  
+  .zoom_btns {
+    margin-right: 10px;
+  }
+
+  .go_to_page_input_container {
+    margin-right: 10px;
+    margin-top: 16px;
+  }
+
+  .show_page_input {
+    margin-right: 10px;
+    margin-top: 16px;
+  }
+}
