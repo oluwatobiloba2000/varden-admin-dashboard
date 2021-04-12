@@ -1,0 +1,30 @@
+.header_email:hover {
+  background-image: linear-gradient(#77be4361, #88e841c7);
+}
+
+.header_email_dropdown_content {
+  display: none;
+  position: absolute;
+  right: 0px;
+  top: 50px;
+  background-color: white;
+  min-width: 160px;
+  /* border-radius: 5px; */
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  padding: 10px 5px;
+  z-index: 900000;
+}
+
+.header_email:hover .header_email_dropdown_content {
+  display: block;
+}
+
+/* .email_header_li{
+    height: 28px;
+} */
+
+.email_header_li:hover{
+    background-color: #8080802b;
+    /* border-radius: 5px; */
+}
+
