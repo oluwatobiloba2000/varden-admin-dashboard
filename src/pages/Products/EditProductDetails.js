@@ -82,7 +82,7 @@ function EditProductDetails() {
 
                     <FormControl marginTop="10px" id="employeeId">
                         <FormLabel>Description</FormLabel>
-                        <Textarea isInvalid={errors.description && errors.description.message ? true : false} {...register("description")} resize="none" minH="150px" defaultdefaultValue={productState.singleProduct.description} />
+                        <Textarea isInvalid={errors.description && errors.description.message ? true : false} {...register("description")} resize="none" minH="150px" defaultValue={productState.singleProduct.description} />
                         <Text fontSize="13px" marginTop="1px" marginBottom="10px"
                             marginLeft="4px"
                             color="#E53E3E"
