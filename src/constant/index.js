@@ -1,0 +1,1 @@
+export const jwt_token_name = 'commerce_jwt';
