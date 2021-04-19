@@ -149,7 +149,7 @@ function Products() {
                                         </BreadcrumbItem>
 
                                         <BreadcrumbItem color="gray" isCurrentPage>
-                                            <span>Product details</span>
+                                            <span>Edit Product</span>
                                         </BreadcrumbItem>
                                     </Breadcrumb>
                                     <EditProductDetails />
