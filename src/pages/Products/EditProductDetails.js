@@ -1,7 +1,7 @@
 import { FormControl, FormLabel } from '@chakra-ui/form-control';
 import { Input } from '@chakra-ui/input';
 import { Box, Flex, Text } from '@chakra-ui/layout';
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router';
 import Loader from '../../component/Loader';
@@ -31,7 +31,7 @@ function EditProductDetails() {
     const dispatch = useDispatch();
     const history = useHistory();
     // const toast = useToast();
-    const { register, handleSubmit, formState: { errors } } = useForm({
+    const { register, handleSubmit, formState: { errors }, setValue } = useForm({
         resolver: yupResolver(schema)
     })
     const productState = useSelector(state => state.products);
@@ -46,6 +46,17 @@ function EditProductDetails() {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
+    useEffect(()=>{
+        if(productState.singleProduct){
+            setValue('title', productState.singleProduct.title)
+            setValue('unit', productState.singleProduct.unit)
+            setValue('description', productState.singleProduct.description)
+            setValue('price', productState.singleProduct.price)
+            setValue('published', productState.singleProduct.published)
+        }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [productState.singleProduct])
+
     const handleEditProduct = (data) => {
         console.log({data})
         // dispatch(addNewAdminAsync(history, data, toast, reset))
@@ -54,15 +65,13 @@ function EditProductDetails() {
     return (
 
         <Box marginTop="5px" className={transitionClass}>
-
-
             <HandleError error={productState.singleProductError} retryFn={() => getProductByIdAsync(history, productId)} />
             {productState.singleProductLoading ? <Loader /> :
                 (productState && productState.singleProduct) &&
                 <form onSubmit={handleSubmit(handleEditProduct)} style={{ margin: " 30px 0px 0px 0px" }}>
                     <FormControl id="name">
                         <FormLabel>Title</FormLabel>
-                        <Input isInvalid={errors.title && errors.title.message ? true : false} {...register("title")}  defaultValue={productState.singleProduct.title} />
+                        <Input isInvalid={errors.title && errors.title.message ? true : false} {...register("title")}   />
                         <Text fontSize="13px" marginTop="1px" marginBottom="10px"
                             marginLeft="4px"
                             color="#E53E3E"
@@ -71,7 +80,7 @@ function EditProductDetails() {
 
                     <FormControl marginTop="10px" id="email">
                         <FormLabel>Unit</FormLabel>
-                        <Input isInvalid={errors.unit && errors.unit.message ? true : false} {...register("unit")} defaultValue={productState.singleProduct.unit} />
+                        <Input isInvalid={errors.unit && errors.unit.message ? true : false} {...register("unit")}  />
                         <Text fontSize="13px" marginTop="1px" marginBottom="10px"
                             marginLeft="4px"
                             color="#E53E3E"
@@ -80,7 +89,7 @@ function EditProductDetails() {
 
                     <FormControl marginTop="10px" id="employeeId">
                         <FormLabel>Description</FormLabel>
-                        <Textarea isInvalid={errors.description && errors.description.message ? true : false} {...register("description")} resize="none" minH="150px" defaultValue={productState.singleProduct.description} />
+                        <Textarea isInvalid={errors.description && errors.description.message ? true : false} {...register("description")} resize="none" minH="150px"  />
                         <Text fontSize="13px" marginTop="1px" marginBottom="10px"
                             marginLeft="4px"
                             color="#E53E3E"
@@ -94,13 +103,13 @@ function EditProductDetails() {
                     />}
                     <FormControl marginTop="10px" id="phone number">
                         <FormLabel>Price</FormLabel>
-                        <Input {...register("price")} isInvalid={errors.price && errors.price.message ? true : false} defaultValue={productState.singleProduct.price} />
+                        <Input  {...register("price")} isInvalid={errors.price && errors.price.message ? true : false}  />
                         <Text fontSize="13px" marginTop="1px" marginBottom="10px"
                             marginLeft="4px"
                             color="#E53E3E"
                         >{errors.price && errors.price.message}</Text>
                     </FormControl>
-                    <Checkbox marginTop="5px" {...register("published")} colorScheme="green" defaultChecked={productState.singleProduct.published}>
+                    <Checkbox marginTop="5px" {...register("published")} colorScheme="green" >
                         Publish
                      </Checkbox>
 
