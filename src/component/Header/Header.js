@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Box, List, ListIcon, ListItem, Stack, Text, Icon, useMediaQuery } from '@chakra-ui/react';
 import { BiChevronDown } from "react-icons/bi";
 import profile_img from '../../img/avatar-blank.jpg';
@@ -7,10 +7,14 @@ import { ColorModeSwitcher } from '../../ColorModeSwitcher';
 import { useColorModeValue } from '@chakra-ui/react';
 import './header.css';
 import Logo from '../Logo/logo';
+import { clearTokenInLocalStorage, decodeToken } from '../../utils/auth';
+import { useHistory } from 'react-router';
 
 const Header = React.memo(() => {
     const text = useColorModeValue('light', 'dark');
-    const [isSmallerThan650] = useMediaQuery("(max-width: 650px)")
+    const [isSmallerThan650] = useMediaQuery("(max-width: 650px)");
+    const [currentLoggedinAdmin] = useState(decodeToken().payload);
+    const history = useHistory();
 
     return (
         <Box zIndex="1" backgroundColor={text === "dark" ? "#0C0B10" : "rgb(196, 65, 47)"} position="fixed" top="0" display="flex" justifyContent="flex-end" width="100%" height="50px" color="white">
@@ -42,24 +46,23 @@ const Header = React.memo(() => {
 
                 {/* Admin profile starts */}
                 <Box display="flex">
-                    {/* <Text cursor="pointer"
-                        fontSize="14px" fontWeight="600" color="primary.100">Super Admin</Text> */}
-                    {/* <Tooltip label="tech@appetite.com.ng" placement="top" openDelay={300}> */}
-                    <Text whiteSpace="nowrap"
+                    {
+                        <Text whiteSpace="nowrap"
                         overflow="hidden"
                         textOverflow="ellipsis"
-                        maxWidth="158px" fontSize="11px" color="primary.100">tech@appetite.com.ng</Text>
-                    {/* </Tooltip> */}
+                        maxWidth="158px" fontSize="11px" color="primary.100">{currentLoggedinAdmin && currentLoggedinAdmin.email}</Text>}
                     <Icon marginLeft="12px" className="header_email_dropdown_icon" as={BiChevronDown} />
                     <div className="header_email_dropdown_content">
                         <List spacing={3}>
                             <ListItem padding="0px 5px" className="email_header_li">
-                                {/* <ListIcon as={MdCheckCircle} color="green.500" /> */}
                                 <ColorModeSwitcher />
                             </ListItem>
                             <ListItem padding="0px 5px" className="email_header_li logout_header_li">
                                 <ListIcon as={BiDoorOpen} color="red.500" />
-                                <span style={{ color: 'red', fontSize: '14px' }}>Logout</span>
+                                <span onClick={()=>{
+                                    clearTokenInLocalStorage()
+                                    history.push('/login');
+                                }} style={{ color: 'red', fontSize: '14px' }}>Logout</span>
                             </ListItem>
                         </List>
                     </div>
