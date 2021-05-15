@@ -12,8 +12,8 @@ function SuccessModal(props) {
         useEffect(()=>{
             if(props.success){
                 onOpen()
-                console.log('open !!!!!!!!!!!!')
             }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
         }, [props.success])
     
     return (
