@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { getCustomers, getCustomersOrders } from '../../../api/customerApi';
+import { handleRedirectBeforeLogout } from '../../../utils/handleLogout';
 
 export const customerSlice = createSlice({
   name: 'customer',
@@ -47,7 +48,7 @@ export const getCustomerAsync = (history) => async (dispatch) =>{
           dispatch(add_customer(getCustomerApi.data))
       }else{
           if(getCustomerApi.error && getCustomerApi.error === 'Request failed with status code 401'){
-            return history.push('/login');
+            return  handleRedirectBeforeLogout(history)
           }
           dispatch(set_loading(false))
           dispatch(set_error(getCustomerApi.error))
@@ -63,7 +64,7 @@ export const addCustomerOrdersAsync = (history, id) => async (dispatch) =>{
           dispatch(add_orders(getCustomerOrdersApi.data))
       }else{
           if(getCustomerOrdersApi.error && getCustomerOrdersApi.error === 'Request failed with status code 401'){
-            return history.push('/login');
+            return  handleRedirectBeforeLogout(history)
           }
           dispatch(set_orders_loading(false))
           dispatch(set_orders_error(getCustomerOrdersApi.error))

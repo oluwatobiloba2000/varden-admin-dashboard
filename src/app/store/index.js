@@ -8,6 +8,7 @@ import  productSlice from '../slice/productSlice/product';
 import orderSlice from '../slice/orderSlice/order';
 import dispatcherSlice  from '../slice/dispatcherSlice/dispatcher';
 import  distributionCenter from '../slice/distributionCenterSlice/distributionCenter';
+import ImageSlice  from '../slice/imageSlice/image';
 const storage = require("redux-persist/lib/storage").default;
 
 let rootReducers  = combineReducers({
@@ -15,22 +16,12 @@ let rootReducers  = combineReducers({
     admins: adminSlice,
     customers: customerSlice,
     products: productSlice,
+    image: ImageSlice,
     orders: orderSlice,
     dispatchers: dispatcherSlice,
     distributionCenters: distributionCenter
 })
 
-
-// export const makeStore = (initialState, { isServer, req, debug, storeKey }) => {
-//     if(isServer){
-//         initialState = initialState || {formServer: "foo"}
-
-//         return configureStore({
-//                 reducer: rootReducers,
-//                 preloadedStore: initialState
-//             })
-//     }   
-//     else{}
 const customizedMiddleware = getDefaultMiddleware({
     serializableCheck: false
 })

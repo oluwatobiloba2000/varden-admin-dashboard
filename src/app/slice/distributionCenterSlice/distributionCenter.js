@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { fetchAllDistributionCenters } from '../../../api/distributionCenterApi';
+import { handleRedirectBeforeLogout } from '../../../utils/handleLogout';
 
 export const distributionCenter = createSlice({
   name: 'distributionCenter',
@@ -38,7 +39,7 @@ export const getDscAsync = (history) => async (dispatch) =>{
           dispatch(add_dsc(getDscApi.data))
       }else{
           if(getDscApi.error && getDscApi.error === 'Request failed with status code 401'){
-            return history.push('/login');
+            return  handleRedirectBeforeLogout(history)
           }
           dispatch(set_loading(false))
           dispatch(set_error(getDscApi.error))

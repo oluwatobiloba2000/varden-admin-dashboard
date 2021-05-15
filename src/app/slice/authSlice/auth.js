@@ -37,7 +37,7 @@ export const logOut = _ => dispatch => {
 }
 
 
-export const login = (data, history) => async (dispatch) =>{
+export const login = (data, history, query) => async (dispatch) =>{
     dispatch(set_auth_loading(true))
     dispatch(set_auth_error(''))
         const dataFromLoginfn = await loginApiFn(data);
@@ -45,7 +45,12 @@ export const login = (data, history) => async (dispatch) =>{
             dispatch(set_auth_loading(false))
             dispatch(set_loggedin_admin(dataFromLoginfn.admin))
             saveTokenInLocalStorage(dataFromLoginfn.token)
-            history.push('/orders');
+            const redirectUrl = query.get('rdr');
+            if(redirectUrl){
+                history.push(redirectUrl);
+            }else{
+                history.push('/orders');
+            }
         }else{
             dispatch(set_auth_loading(false))
             dispatch(set_auth_error(dataFromLoginfn.error))

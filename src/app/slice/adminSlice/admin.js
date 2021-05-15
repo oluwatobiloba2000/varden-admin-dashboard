@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { addAdmin, getAdmin, getAdminDetails } from '../../../api/adminApi';
+import { handleRedirectBeforeLogout } from '../../../utils/handleLogout';
 
 
 export const adminSlice = createSlice({
@@ -59,7 +60,7 @@ export const getAdminAsync = (history) => async (dispatch) =>{
           dispatch(add_admin(getAdminApi.data))
       }else{
           if(getAdminApi.error && getAdminApi.error === 'Request failed with status code 401'){
-            return history.push('/login');
+            return  handleRedirectBeforeLogout(history)
           }
           dispatch(set_loading(false))
           dispatch(set_error(getAdminApi.error))
@@ -76,7 +77,7 @@ export const getAdminDetailsAsync = (history, id) => async (dispatch) =>{
           dispatch(add_admin_details(getAdminDetailsApi.data))
       }else{
           if(getAdminDetailsApi.error && getAdminDetailsApi.error === 'Request failed with status code 401'){
-            return history.push('/login');
+            return  handleRedirectBeforeLogout(history)
           }
           dispatch(set_loading(false))
           dispatch(set_admin_details_error(getAdminDetailsApi.error))
@@ -101,7 +102,7 @@ export const addNewAdminAsync = (history, data, toast, reset) => async (dispatch
           reset();
       }else{
           if(addAdminApi.error && addAdminApi.error === 'Request failed with status code 401'){
-            return history.push('/login');
+            return  handleRedirectBeforeLogout(history)
           }
           dispatch(set_new_admin_loading(false))
           dispatch(set_new_admin_error(addAdminApi.error))
