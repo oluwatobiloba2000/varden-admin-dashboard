@@ -10,11 +10,14 @@ import {
 import { Link } from 'react-router-dom';
 import { BiCartAlt, BiDoorOpen, BiImages, BiShoppingBag, BiUser } from "react-icons/bi";
 import { useColorModeValue } from '@chakra-ui/react';
+import { clearTokenInLocalStorage } from '../../utils/auth';
 import { FaBiking, FaSatelliteDish } from 'react-icons/fa';
+import { useHistory } from 'react-router';
 import './Sidebar.css';
 
 function Sidebar(props) {
     const text = useColorModeValue('light', 'dark');
+    const history = useHistory();
     const [sideNavCloseModal, setSidenavCloseModal] = useState(false);
     const [isSmallerThan650] = useMediaQuery("(max-width: 650px)")
 
@@ -147,6 +150,10 @@ function Sidebar(props) {
                                             alignItems="center"
                                             marginTop='26px'
                                             backgroundColor="rgb(196, 65, 47)"
+                                            onClick={()=>{
+                                                  clearTokenInLocalStorage()
+                                                  history.push('/login')
+                                            }}
                                             paddingLeft="12px" color="primary.100">
                                             <ListIcon as={BiDoorOpen} w="20px" h="20px" color="white" />
                                             <span style={{
@@ -164,32 +171,6 @@ function Sidebar(props) {
                     :
                     <Box w="270px" h="100%" flexDirection="column" backgroundColor={text === 'light' ? 'white' : "#0C0B10"} justifyContent="space-between" borderRight="1px solid #80808059">
                         {sidebarContent()}
-
-                        {/* <Stack>
-                        <List>
-                            <ListItem display="flex"
-                                fontWeight="500"
-                                height="40px"
-                                fontSize="14px"
-                                cursor="pointer"
-                                alignItems="center"
-                                borderRadius="25px"
-                                marginTop="7px"
-                                _hover={{
-                                    transform: "translateX(5px)",
-                                    transition: ".5s ease"
-                                }}
-                                paddingLeft="12px" color="primary.100">
-                                <ListIcon as={BiDoorOpen} w="20px" h="20px" color="red" />
-                                <span style={{
-                                    marginLeft: '10px',
-                                    marginTop: '3px',
-                                    color: 'rgb(196, 65, 47)',
-                                    fontWeight: 400
-                                }}>Logout</span>
-                            </ListItem>
-                        </List>
-                    </Stack> */}
                     </Box>
 
 
