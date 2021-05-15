@@ -14,6 +14,7 @@ import DispatchRiders from './pages/DispatchRiders';
 import DistributionCenter from './pages/DistributionCenter';
 import Images from './pages/ImagesPage';
 import ProtectedRoute from './HOC/ProtectedRoute';
+import SocketComponent from './component/socketComponent';
 axios.defaults.baseURL = 'https://appetite-api-stage.herokuapp.com/api';
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 
@@ -23,6 +24,7 @@ function App() {
   return (
     <ChakraProvider theme={theme}>
       <Router>
+          <SocketComponent/>
           <Switch>
             <Route path="/login" component={Login}/>
             <ProtectedRoute path="/admin">
