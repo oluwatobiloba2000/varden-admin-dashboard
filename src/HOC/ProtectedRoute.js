@@ -15,6 +15,7 @@ function ProtectedRoute({children, ...rest}) {
            {clearTokenInLocalStorage()}
              <Redirect to={{
                  pathname: '/login',
+                 search: `${location !== '/login' && `rdr=${location.pathname}`}`,
                  state: {from: location}
              }}/></> : (children)
             }
