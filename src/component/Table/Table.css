@@ -153,6 +153,7 @@
   background-color: #ffb946b8;
 }
 
+
 @media all and (max-width: 515px) {
   .navigation_container {
     flex-wrap: wrap;
@@ -170,5 +171,38 @@
   .show_page_input {
     margin-right: 10px;
     margin-top: 16px;
+  }
+
+  .fastforward_prev_btn, .prev_btn, .fastforward_next_btn, .next_btn{
+    font-size: 12px;
+  }
+
+  .prev_btn, .next_btn{
+    width: 20px;
+    font-size: 12px;
+    height: 20px;
+  }
+
+  .go_to_page_btn{
+    width: 70px !important;
+    font-size: 11px !important;
+    height: 28px !important;
+    margin-bottom: 10px !important;
+  }
+
+  .go_to_btn_text{
+    font-size: 9px !important;
+  }
+
+  .show_page_input{
+    font-size: 10px !important;
+    width: 90px !important;
+    height: 30px !important;
+    margin-top: 5px !important;
+  }
+
+  .navigation_container .chakra-select__icon-wrapper{
+    margin-right: 11px !important;
+    margin-top: 2px !important;
   }
 }

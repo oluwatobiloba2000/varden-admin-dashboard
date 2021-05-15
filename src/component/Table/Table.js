@@ -12,7 +12,7 @@ import { FiCloudOff } from "react-icons/fi";
 import emptySvg from '../../img/emptySvg.svg';
 import { useDispatch } from 'react-redux';
 
-function TableComponent({ columns, data, isLoading, error, retryFn }) {
+function TableComponent({ columns, data, isLoading, error, retryFn, isAsyncFn }) {
     const dispatch = useDispatch();
     // Use the state and functions returned from useTable to build your UI
     const {
@@ -59,7 +59,7 @@ function TableComponent({ columns, data, isLoading, error, retryFn }) {
                                          :  <AlertIcon fontSize="18px" marginRight="15px" />}
                                           {error === 'Network Error' ? 'Could fetch data, Internet Connection Lost' : error}
                                         </Alert>
-                                <Button width="124px" height="37px" borderRadius="36px" onClick={() => dispatch(retryFn())} leftIcon={<BsArrowCounterclockwise />} colorScheme="orange" variant="solid">
+                                <Button width="124px" height="37px" borderRadius="36px" onClick={() => `${isAsyncFn ? retryFn() : dispatch(retryFn())}`} leftIcon={<BsArrowCounterclockwise />} colorScheme="orange" variant="solid">
                                     Retry
                                 </Button>
                             </Box>
@@ -93,7 +93,7 @@ function TableComponent({ columns, data, isLoading, error, retryFn }) {
                                     return (
                                         <Tr key={index} {...row.getRowProps()}>
                                             {row.cells.map((cell) => (
-                                                <Td zIndex="1" className="table_td" {...cell.getCellProps()} isNumeric={cell.column.isNumeric}>
+                                                <Td zIndex="1" className="table_td" {...cell.getCellProps()} style={cell.column.style} isNumeric={cell.column.isNumeric}>
                                                     {cell.render("Cell")}
                                                 </Td>
                                             ))}
@@ -116,24 +116,24 @@ function TableComponent({ columns, data, isLoading, error, retryFn }) {
                         <div className="navigation_container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                             <span className="zoom_btns">
                                 <Tooltip hasArrow label="zoom to first page" placement="top">
-                                    <button onClick={() => gotoPage(0)} disabled={!canPreviousPage} className={`${!canPreviousPage && 'btn-disabled'}`}>
+                                    <button onClick={() => gotoPage(0)} disabled={!canPreviousPage} className={`fastforward_prev_btn ${!canPreviousPage && 'btn-disabled'}`}>
                                         {'<<'}
                                     </button>
                                 </Tooltip>
 
                                 <Tooltip hasArrow label="Previous" placement="top">
-                                    <button className={`next_zoom_btn ${!canPreviousPage && 'btn-disabled-bg'}`} onClick={() => previousPage()} disabled={!canPreviousPage}>
+                                    <button className={`next_zoom_btn prev_btn ${!canPreviousPage && 'btn-disabled-bg'}`} onClick={() => previousPage()} disabled={!canPreviousPage}>
                                         {'<'}
                                     </button>
                                 </Tooltip>
                                 <Tooltip hasArrow label="Next" placement="top">
-                                    <button className={`next_zoom_btn ${!canNextPage && 'btn-disabled-bg'}`} onClick={() => nextPage()} disabled={!canNextPage} >
+                                    <button className={`next_zoom_btn next_btn ${!canNextPage && 'btn-disabled-bg'}`} onClick={() => nextPage()} disabled={!canNextPage} >
                                         {'>'}
                                     </button>
                                 </Tooltip>
 
                                 <Tooltip hasArrow label="zoom to last page" placement="top">
-                                    <button onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage} className={!canNextPage && 'btn-disabled'}>
+                                    <button onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage} className={`fastforward_next_btn ${!canNextPage && 'btn-disabled'}`}>
                                         {'>>'}
                                     </button>
                                 </Tooltip>
@@ -144,6 +144,7 @@ function TableComponent({ columns, data, isLoading, error, retryFn }) {
                                     transform="translate(11px, -1px)"
                                     fontSize="11px"
                                     color="green"
+                                    className="go_to_btn_text"
                                     fontWeight="bolder">Go to page</Text>
                                 <Input
                                     height="38px"
@@ -155,6 +156,7 @@ function TableComponent({ columns, data, isLoading, error, retryFn }) {
                                     w="100px"
                                     type="number"
                                     defaultValue={pageIndex + 1}
+                                    className="go_to_page_btn"
                                     onChange={e => {
                                         const page = e.target.value ? Number(e.target.value) - 1 : 0
                                         gotoPage(page)
