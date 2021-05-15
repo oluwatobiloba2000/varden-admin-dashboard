@@ -8,7 +8,7 @@ import { FiCloudOff } from "react-icons/fi";
 import { BsArrowCounterclockwise } from 'react-icons/bs';
 import { useDispatch } from 'react-redux';
 
-function HandleError({error, retryFn}) {
+function HandleError({error, retryFn, isAsyncFn}) {
     const dispatch = useDispatch();
 
     return (
@@ -19,7 +19,7 @@ function HandleError({error, retryFn}) {
                      :  <AlertIcon fontSize="18px" marginRight="15px" />}
                       {error === 'Network Error' ? 'Could fetch data, Internet Connection Lost' : error}
                     </Alert>
-            {retryFn && <Button width="124px" height="37px" borderRadius="36px" onClick={() => dispatch(retryFn())} leftIcon={<BsArrowCounterclockwise />} colorScheme="orange" variant="solid">
+            {retryFn && <Button width="124px" height="37px" borderRadius="36px" onClick={() => isAsyncFn ? retryFn() : dispatch(retryFn())} leftIcon={<BsArrowCounterclockwise />} colorScheme="orange" variant="solid">
                 Retry
             </Button>}
         </Box>
