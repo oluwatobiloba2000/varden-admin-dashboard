@@ -1,0 +1,17 @@
+.tab_rounded[aria-selected='true'] {
+  background-color: #c4412f !important;
+  color: white !important;
+}
+
+@media screen and (max-width: 600px) {
+  .title_head{
+    font-size: 12px;
+  }
+  .tab_rounded{
+    font-size: 12px !important;
+  }
+  
+  .distribution_center_details_form label, .distribution_center_details_form input{
+    font-size: 12px !important;
+  }
+}

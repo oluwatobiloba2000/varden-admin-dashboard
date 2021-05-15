@@ -24,9 +24,9 @@ function ProductDetails() {
         const TokenExpired = isTokenExpired();
 
         if (!TokenExpired || TokenExpired !== 'empty token') {
-            if (productState.singleProduct && (productState.singleProduct.id !== parseInt(productId))) {
+            // if (productState.singleProduct && (productState.singleProduct.id !== parseInt(productId))) {
                 dispatch(getProductByIdAsync(history, productId))
-            }
+            // }
         }
 
         // eslint-disable-next-line react-hooks/exhaustive-deps

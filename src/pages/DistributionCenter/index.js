@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react'
-import { Box, Breadcrumb, BreadcrumbItem, Container, Icon, IconButton, Tooltip, useColorModeValue } from '@chakra-ui/react';
+import React, { useEffect, useState } from 'react'
+import { Box, Breadcrumb, BreadcrumbItem, Container, Icon, IconButton, Spinner, Text, Tooltip, useColorModeValue } from '@chakra-ui/react';
 import TableComponent from '../../component/Table/Table';
 import { AiFillEdit } from 'react-icons/ai';
 import { FaEye } from 'react-icons/fa';
@@ -10,9 +10,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getDscAsync } from '../../app/slice/distributionCenterSlice/distributionCenter';
 import { isTokenExpired } from '../../utils/auth';
 import useCustomTransition from '../../customHook/useCustomTransition';
-import { BiChevronRight } from 'react-icons/bi';
+import { Helmet } from 'react-helmet';
+import DistributionCenterDetails from './DistributionCenter__details';
+import RegisterDistribututionCenter from './registerCenter';
 import { Link } from 'react-router-dom';
-import {Helmet} from 'react-helmet';
+import { BiChevronRight } from 'react-icons/bi';
+// import EditProductDetails from '../Products/EditProductDetails';
+import EditCenterdetails from './editCenter';
 
 function DistributionCenter() {
     const location = useLocation();
@@ -20,17 +24,24 @@ function DistributionCenter() {
     const history = useHistory();
     const text = useColorModeValue('light', 'dark');
     const distributionCenterState = useSelector(state => state.distributionCenters);
+    const [currentSelectedDscCenter, setCurrentSelectedDscCenter] = useState();
     const [transitionClass] = useCustomTransition();
-    const { path } = useRouteMatch();
+    const { path, url } = useRouteMatch();
 
+
+    
     useEffect(() => {
         const TokenExpired = isTokenExpired();
 
-        if (!TokenExpired || TokenExpired !== 'empty token') {
-            dispatch(getDscAsync(history))
+        if (location.pathname === '/dsc') {
+            setCurrentSelectedDscCenter('')
+            if(!TokenExpired || TokenExpired !== 'empty token'){
+                dispatch(getDscAsync(history))
+            }
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [location])
+
 
     const columns = React.useMemo(
         () => [
@@ -53,7 +64,7 @@ function DistributionCenter() {
             {
                 Header: 'Actions',
                 accessor: 'id',
-                Cell: ({ value }) => (
+                Cell: (props, { value }) => (
                     <div style={{
                         width: '70px',
                         display: 'flex'
@@ -67,7 +78,9 @@ function DistributionCenter() {
                                 fontSize="20px"
                                 marginRight="10px"
                                 icon={FaEye()}
-                                onClick={() => (console.log(value))}
+                                onClick={() => {
+                                    history.push(`${url}/${props.row.original.id}`)
+                                }}
                             />
                         </Tooltip>
 
@@ -78,7 +91,7 @@ function DistributionCenter() {
                                 aria-label="Call Sage"
                                 fontSize="20px"
                                 icon={AiFillEdit()}
-                                onClick={() => (console.log(value))}
+                                onClick={() =>  history.push(`${url}/edit/${props.row.original.id}`)}
                             />
                         </Tooltip>
 
@@ -86,6 +99,7 @@ function DistributionCenter() {
                 )
             },
         ],
+        // eslint-disable-next-line react-hooks/exhaustive-deps
         [],
     )
     return (
@@ -100,31 +114,47 @@ function DistributionCenter() {
                 <Box w="100%" overflow="auto" p="20px" className={text === 'dark' ? 'dark' : 'light'} backgroundColor={text === 'dark' ? "#222127" : "#e5e5e5"}>
                     <div className={transitionClass}>
                         <h1 className="title_head">
-                            Distribution Center
-                                </h1>
+                            Distribution Center  <Text style={{ color: 'gray', fontWeight: 'bold', marginLeft: '3px' }}>{distributionCenterState.loading ? <Spinner size="xs" /> : currentSelectedDscCenter ? `: ${currentSelectedDscCenter}` : ''}</Text>
+
+                        </h1>
                         <Box w="100%" className="admin_table_container">
-                            <div className="create_button_container">
-                                <button className="create_button_style">Register Center</button>
-                            </div>
-
-                            <Route>
-
-                            </Route>
                             <Switch>
                                 <Route exact path={path}>
+                                    <div className="create_button_container">
+                                      <Link to={`/dsc/create`} ><button className="create_button_style">Register Center</button></Link> 
+                                    </div>
                                     <TableComponent columns={columns} data={distributionCenterState.data} isLoading={distributionCenterState.loading} error={distributionCenterState.error} retryFn={() => getDscAsync(history)} />
                                 </Route>
-                                <Route path={`${path}/:adminId`}>
-                                    <Breadcrumb spacing="8px" separator={<Icon as={BiChevronRight} color="gray.500" />}>
+
+                                <Route path={`${path}/create`}>
+                                    <Breadcrumb marginTop="20px" fontSize="13px" spacing="8px" separator={<Icon as={BiChevronRight} color="gray.500" />}>
                                         <BreadcrumbItem>
-                                            <Link to="/admin">Admin</Link>
+                                            <Link style={{ color: '#007eff' }} to="/dsc">Distribution Centers</Link>
                                         </BreadcrumbItem>
 
-                                        <BreadcrumbItem isCurrentPage>
-                                            <span>Admin details</span>
+                                        <BreadcrumbItem color="gray" isCurrentPage>
+                                            <span>Create Distribution Center</span>
+                                        </BreadcrumbItem>
+
+                                    </Breadcrumb>
+                                    <RegisterDistribututionCenter />
+                                </Route>
+
+                                <Route path={`${path}/edit/:id`}>
+                                    <Breadcrumb marginTop="20px" fontSize="13px" spacing="8px" separator={<Icon as={BiChevronRight} color="gray.500" />}>
+                                        <BreadcrumbItem>
+                                            <Link style={{ color: '#007eff' }} to="/dsc">Distribution Centers</Link>
+                                        </BreadcrumbItem>
+
+                                        <BreadcrumbItem color="gray" isCurrentPage>
+                                            <span>Edit Distribution Center</span>
                                         </BreadcrumbItem>
                                     </Breadcrumb>
-                                    {<h1>View single topic</h1>}
+                                    <EditCenterdetails />
+                                </Route>
+
+                                <Route path={`${path}/:id`}>
+                                    <DistributionCenterDetails setCurrentSelectedDscCenter={setCurrentSelectedDscCenter} />
                                 </Route>
                             </Switch>
 

@@ -16,6 +16,7 @@ import Icon from '@chakra-ui/icon';
 import { useHistory } from 'react-router';
 import useCustomTransition from '../../customHook/useCustomTransition';
 import { Helmet } from 'react-helmet';
+import { useQuery } from '../../customHook/useQuery';
 
 const schema = yup.object().shape({
     email: yup.string().email().required(),
@@ -30,9 +31,10 @@ function Login() {
     const state = useSelector(state => state.loggedinadmin);
     const history = useHistory();
     const dispatch = useDispatch();
+    const query = useQuery();
     const [transitionClass] = useCustomTransition();
     const submitForm = (data) => {
-        dispatch(login(data, history))
+        dispatch(login(data, history, query))
     }
 
     return (

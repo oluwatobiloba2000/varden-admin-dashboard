@@ -2,3 +2,8 @@
     background-color: #c4412f !important;
     color: white  !important;
 }
+
+#selected_tag{
+    background-color: #47525d75;
+    color: white;
+}

@@ -1,0 +1,17 @@
+.order_details_head_title{
+    background-color: #77be43 !important;
+    color: white;
+}
+
+.group_list_item{
+    position: relative;
+    display: block;
+    padding: .75rem 1.25rem;
+    background-color: #fff;
+    border: 1px solid rgba(0,0,0,.125);
+}
+
+.mt-2{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}

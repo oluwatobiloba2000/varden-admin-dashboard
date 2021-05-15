@@ -152,7 +152,6 @@ function Customers() {
 
                         {currentCustomerAddress && currentCustomerAddress[0] ?
                             <Box className="box-group" >
-                                {console.log({currentCustomerAddress : currentCustomerAddress[0]})}
                                 <div className="list-group-item box-list-header"><b>Address:</b> {currentCustomerAddress[0].address}</div>
                                 <div className="list-group-item"><b>City:</b> {currentCustomerAddress[0].city}</div>
                                 <div className="list-group-item"><b>Country:</b> {currentCustomerAddress[0].country}</div>
