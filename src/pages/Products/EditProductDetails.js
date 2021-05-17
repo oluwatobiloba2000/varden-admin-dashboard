@@ -84,8 +84,7 @@ function EditProductDetails() {
         setAssignLoading(true);
         const productImage = await assignProductImages(productId, { imageId: image_id });
         if (productImage.success) {
-            setAssignLoading(false);
-            onClose()
+            setAssignLoading(false)
             dispatch(getProductByIdAsync(history, productId))
         } else {
             setAssignLoading(false)
@@ -100,7 +99,6 @@ function EditProductDetails() {
         const productImage = await unAssignProductImages(productId, image_id);
         if (productImage.success) {
             setAssignLoading(false);
-            onClose()
             dispatch(getProductByIdAsync(history, productId))
         } else {
             setAssignLoading(false)
