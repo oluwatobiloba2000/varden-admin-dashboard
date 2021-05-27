@@ -44,7 +44,6 @@ const SelectedImage = ({ index, photo, selected, onImageClick }) => {
       onImageClick && (await onImageClick());
       setIsSelected(!isSelected);
     } catch (error) {
-      console.log(error);
     }
   };
 

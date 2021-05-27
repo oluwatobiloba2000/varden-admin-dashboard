@@ -54,7 +54,7 @@ function ProductDetails() {
                         <FormLabel>Description</FormLabel>
                         <Textarea readOnly defaultValue={productState.singleProduct.description} />
                     </FormControl>
-                    {productState.singleProduct && productState.singleProduct.images && <Image
+                    {productState.singleProduct && productState.singleProduct.images.length > 0 && <Image
                         boxSize="100px"
                         objectFit="cover"
                         src={productState.singleProduct.images[0].image_url}

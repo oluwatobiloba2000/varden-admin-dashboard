@@ -15,6 +15,7 @@ import { Link } from 'react-router-dom';
 import ProductDetails from './ProductDetails';
 import EditProductDetails from './EditProductDetails';
 import {Helmet} from 'react-helmet';
+import AddProductDetails from './createProduct';
 
 function Products() {
     let location = useLocation();
@@ -139,7 +140,7 @@ function Products() {
                                             <span>Create product</span>
                                         </BreadcrumbItem>
                                     </Breadcrumb>
-                                    {/* <CreateAdmin/> */}
+                                    <AddProductDetails/>
                                 </Route>
 
                                 <Route path={`${path}/edit/:productId`}>

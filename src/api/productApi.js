@@ -122,3 +122,23 @@ export const unAssignProductImages = async (productId, imageId) => {
     return {success: false, error: errorMessage}
   }
 };
+
+export const addProductApi = async (payload) => {
+  try {
+    const {data} = await axios.post("/product", payload, {
+      headers: {
+        "Accept-Language": "en-US,en;q=0.8",
+        "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${getTokenFromLocalStorage()}`,
+      },
+      crossDomain: true,
+    });
+    return {  
+      success: true,
+      data: data.data
+  };
+} catch (error) {
+  let errorMessage = error.message;
+  return {success: false, error: errorMessage}
+}
+};
