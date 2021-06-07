@@ -146,12 +146,10 @@ export const addProductApi = async (payload) => {
 export const deleteProductApi = async (product) => {
   
   let productId = product.id;
-  const payload = {
-    images: product.images,
-  };
+
 
   try {
-    const {data} = await axios.delete(`/product/${productId}`, payload, {
+    const {data} = await axios.delete(`/product/${productId}`, {
       headers: {
         "Accept-Language": "en-US,en;q=0.8",
         "Content-Type": "multipart/form-data",
@@ -163,6 +161,7 @@ export const deleteProductApi = async (product) => {
       success: true,
       data: data.data
   };
+  
 } catch (error) {
   let errorMessage = error.message;
   return {success: false, error: errorMessage}

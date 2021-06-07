@@ -49,18 +49,22 @@ function Products() {
             const product = await deleteProductApi({id});
             console.log({product})
             if(product.success){
-                dispatch(delete_product(id));
+                console.log('delete product', id)
+                dispatch(delete_product({id}));
+                e.target.classList.remove('loading-delete-product');
+                e.target.removeAttribute("disabled")
+            }else{
+                e.target.classList.remove('loading-delete-product');
+                e.target.removeAttribute("disabled")
+                toast({
+                    title: "An Error Occured",
+                    description: "Product cannot be deleted",
+                    status: "error",
+                    duration: 3000,
+                    isClosable: true,
+                  })
             }
 
-            e.target.classList.remove('loading-delete-product');
-            e.target.removeAttribute("disabled")
-            toast({
-                title: "An Error Occured",
-                description: "Product cannot be deleted",
-                status: "error",
-                duration: 3000,
-                isClosable: true,
-              })
         
 
 

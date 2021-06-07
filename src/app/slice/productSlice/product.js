@@ -46,7 +46,7 @@ export const productSlice = createSlice({
       state.error = action.payload
     },
     delete_product: (state, action)=>{
-      state.data = state.data.filter((product)=> product.id !== action.payload.id);
+      state.data = state.data.filter((product)=> product.id !== parseInt(action.payload.id));
     }
   },
 })
