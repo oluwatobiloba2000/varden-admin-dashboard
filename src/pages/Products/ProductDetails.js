@@ -33,7 +33,6 @@ function ProductDetails() {
     return (
 
         <Box marginTop="5px" className={transitionClass}>
-            {console.log({singleProduct : productState.singleProduct})}
             <HandleError error={productState.singleProductError} retryFn={() => getProductByIdAsync(history, productId)} />
             {productState.singleProductLoading ? <Loader /> :
                 (productState && productState.singleProduct && !productState.singleProductError) &&
