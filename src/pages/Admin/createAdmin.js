@@ -19,7 +19,7 @@ import { addNewAdminAsync } from '../../app/slice/adminSlice/admin';
 const schema = yup.object().shape({
     name: yup.string().required(),
     email: yup.string().email().required(),
-    employee_id: yup.string().min(11).required(),
+    employee_id: yup.string().required(),
     phone_number: yup.string().min(11).required(),
     password: yup.string().min(4).required(),
 });

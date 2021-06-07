@@ -24,9 +24,7 @@ function ProductDetails() {
         const TokenExpired = isTokenExpired();
 
         if (!TokenExpired || TokenExpired !== 'empty token') {
-            // if (productState.singleProduct && (productState.singleProduct.id !== parseInt(productId))) {
                 dispatch(getProductByIdAsync(history, productId))
-            // }
         }
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -35,26 +33,26 @@ function ProductDetails() {
     return (
 
         <Box marginTop="5px" className={transitionClass}>
-            {/* <SuccessModal success={productState.singleProduct && productState.singleProduct.title } messageBody="Admin Has been added successfully" /> */}
+            {console.log({singleProduct : productState.singleProduct})}
             <HandleError error={productState.singleProductError} retryFn={() => getProductByIdAsync(history, productId)} />
             {productState.singleProductLoading ? <Loader /> :
                 (productState && productState.singleProduct && !productState.singleProductError) &&
                 <form style={{ margin: " 30px 0px 0px 0px" }}>
                     <FormControl id="name">
                         <FormLabel>Title</FormLabel>
-                        <Input readOnly defaultValue={productState.singleProduct.title} />
+                        <Input readOnly value={productState.singleProduct.title} />
                     </FormControl>
 
                     <FormControl marginTop="10px" id="email">
                         <FormLabel>Unit</FormLabel>
-                        <Input readOnly defaultValue={productState.singleProduct.unit} />
+                        <Input readOnly value={productState.singleProduct.unit} />
                     </FormControl>
 
                     <FormControl marginTop="10px" id="employeeId">
                         <FormLabel>Description</FormLabel>
-                        <Textarea readOnly defaultValue={productState.singleProduct.description} />
+                        <Textarea readOnly value={productState.singleProduct.description} />
                     </FormControl>
-                    {productState.singleProduct && productState.singleProduct.images.length > 0 && <Image
+                    {productState.singleProduct && productState.singleProduct.images && productState.singleProduct.images.length > 0 && <Image
                         boxSize="100px"
                         objectFit="cover"
                         src={productState.singleProduct.images[0].image_url}
@@ -62,7 +60,7 @@ function ProductDetails() {
                     />}
                     <FormControl marginTop="10px" id="phone number">
                         <FormLabel>Price</FormLabel>
-                        <Input readOnly defaultValue={productState.singleProduct.price} />
+                        <Input readOnly value={productState.singleProduct.price} />
                     </FormControl>
                     <Checkbox marginTop="5px" colorScheme="green" disabled isChecked={productState.singleProduct.published}>
                         Publish
