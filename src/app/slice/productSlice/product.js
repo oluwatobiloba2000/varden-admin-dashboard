@@ -44,12 +44,15 @@ export const productSlice = createSlice({
     },
     set_error: (state, action)=>{
       state.error = action.payload
+    },
+    delete_product: (state, action)=>{
+      state.data = state.data.filter((product)=> product.id !== action.payload.id);
     }
   },
 })
 
 // Action creators are generated for each case reducer function
-export const {edit_product_error,edit_product_loading, add_single_product, set_single_product_error, single_product_loading,add_product,set_edit_product, set_loading, set_error} = productSlice.actions
+export const {delete_product ,edit_product_error,edit_product_loading, add_single_product, set_single_product_error, single_product_loading,add_product,set_edit_product, set_loading, set_error} = productSlice.actions
 
 export default productSlice.reducer;
 

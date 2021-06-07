@@ -1,0 +1,25 @@
+.loading-delete-product{
+    color: #80808054;
+}
+
+#loading-delete-icon{
+    display: none;
+}
+
+.loading-delete-product>.delete-icon{
+    width: 0 !important;
+}
+
+.delete-product-btn:hover{
+    background-color: #ff00009c !important;
+}
+.delete-product-btn:hover .delete-icon{
+    width: 0px;
+}
+
+.loading-delete-product ~ #loading-delete-icon{
+    display: block;
+    position: absolute;
+    top: 9px;
+    right: 8px;
+}

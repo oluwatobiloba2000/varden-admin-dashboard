@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react'
-import { Box, Breadcrumb, BreadcrumbItem, Container, Icon, IconButton, Tooltip, useColorModeValue } from '@chakra-ui/react';
+import { Box, Breadcrumb, BreadcrumbItem, Container, Icon, IconButton, Spinner, Tooltip, useColorModeValue, useToast } from '@chakra-ui/react';
 import TableComponent from '../../component/Table/Table';
 import { FaEye } from 'react-icons/fa';
-import { AiFillEdit } from "react-icons/ai";
+import { AiFillDelete, AiFillEdit } from "react-icons/ai";
 import Sidebar from '../../component/SideBar/Sidebar';
 import Header from '../../component/Header/Header';
 import { Route, Switch, useHistory, useLocation, useRouteMatch } from 'react-router';
@@ -16,11 +16,15 @@ import ProductDetails from './ProductDetails';
 import EditProductDetails from './EditProductDetails';
 import {Helmet} from 'react-helmet';
 import AddProductDetails from './createProduct';
+import './style.css';
+import { delete_product } from '../../app/slice/productSlice/product';
+import { deleteProductApi } from '../../api/productApi';
 
 function Products() {
     let location = useLocation();
     const text = useColorModeValue('light', 'dark');
     const history = useHistory()
+    const toast = useToast();
     const dispatch = useDispatch();
     const productState = useSelector(state => state.products);
     const [transitionClass] = useCustomTransition();
@@ -35,6 +39,38 @@ function Products() {
     }, [])
 
     const { path, url } = useRouteMatch();
+
+    const onDeleteProducts = async (e, id) =>{
+        e.target.classList.add('loading-delete-product');
+        e.target.setAttribute("disabled", "true");
+
+
+    
+            const product = await deleteProductApi({id});
+            console.log({product})
+            if(product.success){
+                dispatch(delete_product(id));
+            }
+
+            e.target.classList.remove('loading-delete-product');
+            e.target.removeAttribute("disabled")
+            toast({
+                title: "An Error Occured",
+                description: "Product cannot be deleted",
+                status: "error",
+                duration: 3000,
+                isClosable: true,
+              })
+        
+
+
+        // setTimeout(()=>{
+        //     e.target.classList.remove('loading-delete-product');
+        //     e.target.removeAttribute("disabled");
+        // }, 2000)
+
+    }
+
 
     const columns = React.useMemo(
         () => [
@@ -94,6 +130,21 @@ function Products() {
                             />
                         </Tooltip>
 
+                        <Tooltip label="Delete" placement="top" hasArrow >
+                            <span style={{position: 'relative'}} onClick={(e) => onDeleteProducts(e, value)}>
+                                <IconButton
+                                ml="8px"
+                                    variant="outline"
+                                    className="delete-product-btn"
+                                    colorScheme="red"
+                                    aria-label="Call Sage"
+                                    fontSize="20px"
+                                    icon={AiFillDelete({className: 'delete-icon'})}
+                                    
+                                ></IconButton>
+                                <Spinner color="red" id="loading-delete-icon"/>
+                            </span>
+                        </Tooltip>
                     </div>
                 )
             },
